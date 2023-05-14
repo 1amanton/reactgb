@@ -1,15 +1,17 @@
+import classes from "./Addmsg.module.css"
 import { useState } from "react"
+import { AUTHOR } from "../constants"
 
 
-export const Addmsg = ({ messages, setMessages }) => {
+export const Addmsg = ({ messages, setMessages, addMessage }) => {
     console.log(messages)
 
-    const [author, setAuthor] = useState("Author")
-    const [text, setText] = useState("Your Message")
+    // const [author, setAuthor] = useState("Author")
+    const [text, setText] = useState("")
 
-    const changeAuthor = (e) => {
-        setAuthor(e.target.value)
-    }
+    // const changeAuthor = (e) => {
+    //     setAuthor(e.target.value)
+    // }
     const changeText = (e) => {
         setText(e.target.value)
     }
@@ -18,26 +20,27 @@ export const Addmsg = ({ messages, setMessages }) => {
         e.preventDefault()
 
         let obj = {
-            author: author,
+            author: AUTHOR.user,
             text: text,
         }
 
-        setMessages((prevState) => [...prevState, obj])
+        addMessage(obj)
+        // setAuthor("")
+        setText("")
     }
 
     return (
-        <div>
+        <div className={classes.addmsg}>
 
             <h3>Add new message</h3>
-            Name: {author}
+            <span className={classes.user}>Name: {AUTHOR.user}</span>
             <br />
-            Message: {text}
-            <form onSubmit={addMsg}>
-                <input type="text" placeholder={author} onChange={changeAuthor} />
+            <form onSubmit={addMsg} className={classes.form}>
+                {/* <input type="text" onChange={changeAuthor} />
+                <br /> */}
+                <input type="text" value={text} onChange={changeText} />
                 <br />
-                <input type="text" placeholder={text} onChange={changeText} />
-                <br />
-                <button>Post</button>
+                <button disabled={!text}>Post</button>
             </form>
         </div>
     )
