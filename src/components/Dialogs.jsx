@@ -1,3 +1,4 @@
+import { Addmsg } from "./Addmsg"
 import classes from "./Dialogs.module.css"
 import { Msg } from "./Msg"
 
@@ -14,6 +15,8 @@ export const Dialogs = ({ messages, setMessages }) => {
                     )
                 })}
             </div>
+
+            <Addmsg messages={messages} setMessages={setMessages} />
 
         </div>
     )
