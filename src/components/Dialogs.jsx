@@ -1,7 +1,24 @@
+import { useEffect } from "react"
+import { Addmsg } from "./Addmsg"
 import classes from "./Dialogs.module.css"
 import { Msg } from "./Msg"
 
-export const Dialogs = ({ messages, setMessages }) => {
+export const Dialogs = ({ messages, setMessages, addMessage }) => {
+
+    useEffect(() => {
+        const list = [
+            {
+                author: "John",
+                text: "Hello",
+            },
+            {
+                author: "Anna",
+                text: "How are u?",
+            }
+        ]
+        setMessages((prevState) => [...prevState, ...list])
+
+    }, [])
 
     return (
         <div className={classes.dialogs}>
@@ -14,6 +31,8 @@ export const Dialogs = ({ messages, setMessages }) => {
                     )
                 })}
             </div>
+
+            {/* <Addmsg messages={messages} setMessages={setMessages} addMessage={addMessage} /> */}
 
         </div>
     )
